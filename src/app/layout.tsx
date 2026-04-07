@@ -1,3 +1,4 @@
+import Header from "@/components/shared/header";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
@@ -37,7 +38,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <Header />
+            <main>{children}</main>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
