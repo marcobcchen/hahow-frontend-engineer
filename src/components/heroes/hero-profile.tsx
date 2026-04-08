@@ -84,7 +84,7 @@ const HeroProfile = ({ id, data }: Props) => {
 
   return (
     <Card className="w-full max-w-200 p-8 rounded-lg">
-      <p className="text-xl font-bold">剩餘能力值: {remainingValue}</p>
+      <p className="text-xl font-bold">剩餘能力值：{remainingValue}</p>
       {Object.entries(profile).map(([key, value]) => (
         <StatControl
           key={key}

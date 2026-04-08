@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 const Logo = () => {
   const router = useRouter();
   return (
-    <Button variant="ghost" onClick={() => router.push("/")}>
+    <Button
+      className="bg-transparent hover:dark:bg-transparent"
+      variant="ghost"
+      onClick={() => router.push("/")}
+    >
       <House className="size-6" />
     </Button>
   );

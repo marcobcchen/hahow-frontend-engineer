@@ -41,7 +41,9 @@ export default function RootLayout({
         >
           <QueryProvider>
             <Header />
-            <main>{children}</main>
+            <main className="min-h-dvh bg-linear-[180deg,#f3f3f3_0%,#ecebfd_60%,#d7d5fb_90%,#b8b7f5_100%] dark:bg-linear-[180deg,#1a1a2e_0%,#2d2652_60%,#3d3a6f_90%,#504a8a_100%] py-10">
+              {children}
+            </main>
             <Toaster />
           </QueryProvider>
         </ThemeProvider>

@@ -17,7 +17,7 @@ const HeroCard = ({ id, name, image }: Props) => {
 
   return (
     <Card
-      className={`relative w-full pt-0 rounded-lg ${isActive ? "ring-2 ring-blue-500" : ""}`}
+      className={`relative w-full pt-0 rounded-lg ${isActive ? "ring-4 ring-primary dark:ring-primary" : ""}`}
     >
       <div className="absolute inset-0 z-30 aspect-square bg-black/35" />
       <div className="relative z-20 w-full aspect-square">

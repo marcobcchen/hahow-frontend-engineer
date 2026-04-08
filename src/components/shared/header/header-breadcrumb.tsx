@@ -31,7 +31,7 @@ const HeaderBreadcrumb = () => {
 
             let label = segment;
             if (href === pathnames.HEROES) {
-              label = "Heroes";
+              label = "英雄一覽";
             } else {
               label = `Hero ${segment}`;
             }
