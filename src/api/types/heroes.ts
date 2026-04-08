@@ -1,10 +1,10 @@
-export interface Hero {
+export interface HeroType {
   id: string;
   name: string;
   image: string;
 }
 
-export interface HeroProfile {
+export interface HeroProfileType {
   str: number;
   int: number;
   agi: number;

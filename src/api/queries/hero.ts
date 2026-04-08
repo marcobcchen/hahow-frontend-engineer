@@ -26,7 +26,7 @@ export function useGetHeroByIdQuery<
   TData = Awaited<ReturnType<typeof getHeroById>>,
   TError = AxiosError,
 >(
-  params: { id: number },
+  params: { id: string },
   options?: UseQueryOptions<
     Awaited<ReturnType<typeof getHeroById>>,
     TError,
@@ -45,7 +45,7 @@ export function useGetHeroProfileByIdQuery<
   TData = Awaited<ReturnType<typeof getHeroProfileById>>,
   TError = AxiosError,
 >(
-  params: { id: number },
+  params: { id: string },
   options?: UseQueryOptions<
     Awaited<ReturnType<typeof getHeroProfileById>>,
     TError,
