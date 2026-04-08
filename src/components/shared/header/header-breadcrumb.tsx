@@ -18,8 +18,6 @@ const HeaderBreadcrumb = () => {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
 
-  console.log("pathnames.HEROES.slice(1):", pathnames.HEROES.slice(1));
-
   return (
     <>
       {segments.length > 0 ? (
