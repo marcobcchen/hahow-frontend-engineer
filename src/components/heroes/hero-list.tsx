@@ -7,7 +7,7 @@ interface Props {
 
 const HeroList = ({ data }: Props) => {
   return (
-    <div className="w-full max-w-200 grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4">
+    <section className="w-full max-w-200 grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4">
       {data?.map((hero) => (
         <HeroCard
           key={hero.id}
@@ -16,7 +16,7 @@ const HeroList = ({ data }: Props) => {
           image={hero.image}
         />
       ))}
-    </div>
+    </section>
   );
 };
 
