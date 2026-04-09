@@ -33,12 +33,12 @@ src/
 
 ## Application 邏輯架構
 
-- api/ 負責 API 資料相關處理
-- app/ 負責路由與頁面組裝
-- components/ 負責頁面元件、全站共用元件
-- providers/ 負責全域資料
-- constants / 提出全站使用的常數
-- lib/ 提出全站共用的工具方法
+- api/ 負責 API 資料相關處理。
+- app/ 負責路由與頁面組裝。
+- components/ 負責頁面元件、全站共用元件。
+- providers/ 負責全域資料。
+- constants / 提出全站使用的常數。
+- lib/ 提出全站共用的工具方法。
 
 以 App Router 作為頁面架構，React Query 作為資料管理核心，components 作為 UI 呈現面，再透過 providers、constants、lib 做全域提供與基礎的抽象方法。
 
@@ -48,37 +48,25 @@ src/
 
 ## 第三方 library
 
-- react-query：使用 React Query 作為 API 管理層
-- axios：API 請求方法
-- dayjs：提供時間格式工具方法
-- lucide-react：提供 icon 元件
-- next-theme：設定 light mode/dark mode
-- shadcn：提供全站共用元件
-- sonner：shadcn UI 的 toast 元件
+- react-query：使用 React Query 作為 API 管理層。
+- axios：API 請求方法。
+- dayjs：提供時間格式工具方法。
+- lucide-react：提供 icon 元件。
+- next-theme：設定 light mode/dark mode。
+- shadcn：提供全站共用元件。
+- sonner：shadcn UI 的 toast 元件。
 
 ## 註解原則
 
-- API 請求的格式說明
-- 較複雜的業務邏輯（ex: 能力值需符合特定條件才能儲存）
+- API 請求的格式說明。
+- 較複雜的業務邏輯（ex: 能力值需符合特定條件才能儲存）。
 
 ## 問題處理
 
-問題：
-:::warning
-在使用 React Query 與 Shadcn UI 時，發現版本與之前差異較大，所以過去的使用方法有些已被棄用。
-:::
-處理：
-:::success
-翻閱官方文件也透過 Codex 直接進行比較與修正。
-:::
-問題：
-:::warning
-編輯並儲存能力值之後，發現點擊其他英雄再點擊回剛剛儲存過的英雄時，該英雄顯示的能力值並不是儲存當下的樣貌，而是一開始取得的狀態。
-:::
-處理：
-:::success
-確認 API 確實成功儲存資料之後，發現是 React Query 對於 GET 過的 `/heroes/:heroId` 有快取，所以必須在儲存成功之後主動清除該快取，以方便拿到最新的資料。
-:::
+1. <span style="color: red">問題</span>： 在使用 React Query 與 Shadcn UI 時，發現版本與之前差異較大，所以過去的使用方法有些已被棄用。
+   <span style="color: green">處理</span>： 翻閱官方文件並透過 Codex 直接進行比較與修正。
+2. <span style="color: red">問題</span>： 編輯並儲存能力值之後，發現點擊其他英雄再點擊回剛剛儲存過的英雄時，該英雄顯示的能力值並不是儲存當下的樣貌，而是一開始取得的狀態。
+   <span style="color: green">處理</span>： 確認 API 確實成功儲存資料之後，發現是 React Query 對於 GET 過的 `/heroes/:heroId` 有快取，所以必須在儲存成功之後主動清除該快取，以方便拿到最新的資料。
 
 ## 加分項目
 
