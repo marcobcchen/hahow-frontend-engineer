@@ -5,7 +5,7 @@ import { saveStats } from "@/api/requests";
 import { HeroProfileType } from "@/api/types";
 import { Card } from "@/components/ui/card";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import StatControl from "./stat-control";
@@ -20,12 +20,21 @@ const HeroProfile = ({ id, data }: Props) => {
   const [profile, setProfile] = useState(data);
 
   // 計算總能力值
-  const totalValue = Object.values(data).reduce((acc, value) => acc + value, 0);
+  const totalValue = useMemo(
+    () => Object.values(data).reduce((acc, value) => acc + value, 0),
+    [data],
+  );
+
+  // 計算目前分配的能力值總和
+  const currentTotalValue = useMemo(
+    () => Object.values(profile).reduce((acc, value) => acc + value, 0),
+    [profile],
+  );
 
   // 計算剩餘能力值
-  const remainingValue = Math.max(
-    totalValue - Object.values(profile).reduce((acc, value) => acc + value, 0),
-    0,
+  const remainingValue = useMemo(
+    () => Math.max(totalValue - currentTotalValue, 0),
+    [totalValue, currentTotalValue],
   );
 
   // 處理能力值變更
@@ -41,12 +50,15 @@ const HeroProfile = ({ id, data }: Props) => {
     });
   };
 
+  // 儲存能力值的 mutation
   const saveStatsMutation = useMutation({
     mutationFn: saveStats,
     onSuccess: () => {
+      // 重新取得英雄能力資料以更新畫面
       queryClient.invalidateQueries({
         queryKey: [queryKeys.HERO_PROFILE, { id }],
       });
+
       toast.success("能力值儲存成功", {
         position: "top-center",
       });
@@ -64,12 +76,13 @@ const HeroProfile = ({ id, data }: Props) => {
       toast.warning("還有點數可以分配喔！", {
         position: "top-center",
       });
-    } else {
-      saveStatsMutation.mutate({
-        id,
-        ...profile,
-      });
+      return;
     }
+
+    saveStatsMutation.mutate({
+      id,
+      ...profile,
+    });
   };
 
   // 重新分配能力值
@@ -78,10 +91,14 @@ const HeroProfile = ({ id, data }: Props) => {
   };
 
   // 檢查能力值是否有變更
-  const hasChanges = Object.keys(profile).some(
-    (key) =>
-      profile[key as keyof HeroProfileType] !==
-      data[key as keyof HeroProfileType],
+  const hasChanges = useMemo(
+    () =>
+      Object.keys(profile).some(
+        (key) =>
+          profile[key as keyof HeroProfileType] !==
+          data[key as keyof HeroProfileType],
+      ),
+    [profile, data],
   );
 
   return (
@@ -115,7 +132,7 @@ const HeroProfile = ({ id, data }: Props) => {
           onClick={onSaveStats}
           disabled={!hasChanges || saveStatsMutation.isPending}
         >
-          儲存能力值
+          {saveStatsMutation.isPending ? "儲存中..." : "儲存能力值"}
         </Button>
       </div>
     </Card>
