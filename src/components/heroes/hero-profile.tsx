@@ -19,15 +19,16 @@ const HeroProfile = ({ id, data }: Props) => {
   const queryClient = useQueryClient();
   const [profile, setProfile] = useState(data);
 
-  // 計算總點數
+  // 計算總能力值
   const totalValue = Object.values(data).reduce((acc, value) => acc + value, 0);
 
-  // 計算剩餘點數
+  // 計算剩餘能力值
   const remainingValue = Math.max(
     totalValue - Object.values(profile).reduce((acc, value) => acc + value, 0),
     0,
   );
 
+  // 處理能力值變更
   const handleChange = (key: keyof HeroProfileType, nextValue: number) => {
     setProfile((currentProfile) => {
       // 能力值不能小於零
@@ -57,7 +58,7 @@ const HeroProfile = ({ id, data }: Props) => {
     },
   });
 
-  // 儲存點數
+  // 儲存能力值
   const onSaveStats = () => {
     if (remainingValue !== 0) {
       toast.warning("還有點數可以分配喔！", {
@@ -71,11 +72,12 @@ const HeroProfile = ({ id, data }: Props) => {
     }
   };
 
+  // 重新分配能力值
   const onResetStats = () => {
     setProfile({ str: 0, int: 0, agi: 0, luk: 0 });
   };
 
-  // 檢查是否有變更
+  // 檢查能力值是否有變更
   const hasChanges = Object.keys(profile).some(
     (key) =>
       profile[key as keyof HeroProfileType] !==
